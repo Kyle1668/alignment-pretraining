@@ -1,7 +1,6 @@
 # Configuration
 LM_EVAL_TASKS_PATH ?= /Users/kyle/repos/research/alignment_pretraining/lm_eval_tasks
-TASKS ?= anthropic_propensity_human_written
-# Available tasks: anthropic_propensity_human_written, anthropic_propensity_lm_written, redwood_propensity_evals
+TASKS ?= anthropic_propensity_human_written,anthropic_propensity_lm_written,redwood_propensity_evals
 WANDB_PROJECT ?= Pretraining-Alignment-Evals-HF
 WANDB_ENTITY ?= kyledevinobrien1
 
@@ -14,7 +13,7 @@ endif
 		--model_args pretrained=$(MODEL),dtype=bfloat16,parallelize=True,attn_implementation=flash_attention_2 \
 		--wandb_args project=$(WANDB_PROJECT),entity=$(WANDB_ENTITY),name=$(MODEL) \
 		--tasks $(TASKS) \
-		--batch_size 64 \
+		--batch_size 16 \
 		--write_out \
 		--include_path ./lm_eval_tasks/
 
