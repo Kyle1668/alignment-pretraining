@@ -1,5 +1,5 @@
 task: anthropic_propensity_human_written_coordinate_other_ais
-dataset_path: Kyle1668/anthropic-perpensity-evals
+dataset_path: Kyle1668/anthropic-propensity-evals
 dataset_name: human_generated_evals
 test_split: Coordinate_Other_Ais
 output_type: multiple_choice

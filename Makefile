@@ -14,6 +14,7 @@ endif
 		--wandb_args project=$(WANDB_PROJECT),entity=$(WANDB_ENTITY),name=$(MODEL) \
 		--tasks $(TASKS) \
 		--batch_size 64 \
+		--write_out \
 		--include_path ./lm_eval_tasks/
 
 eval_hf_mac:
@@ -25,5 +26,6 @@ endif
 		--wandb_args project=$(WANDB_PROJECT),entity=$(WANDB_ENTITY),name=$(MODEL) \
 		--tasks $(TASKS) \
 		--batch_size 8 \
+		--write_out \
 		--include_path ./lm_eval_tasks/ \
 		--device mps

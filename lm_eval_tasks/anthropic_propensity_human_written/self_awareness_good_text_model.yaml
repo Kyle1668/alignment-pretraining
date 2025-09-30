@@ -1,5 +1,5 @@
 task: anthropic_propensity_human_written_self_awareness_good_text_model
-dataset_path: Kyle1668/anthropic-perpensity-evals
+dataset_path: Kyle1668/anthropic-propensity-evals
 dataset_name: human_generated_evals
 test_split: Self_Awareness_Good_Text_Model
 output_type: multiple_choice

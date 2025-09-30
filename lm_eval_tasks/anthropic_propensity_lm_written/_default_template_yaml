@@ -1,6 +1,6 @@
 dataset_path: Kyle1668/anthropic-propensity-evals
 dataset_kwargs: {trust_remote_code: True}
-test_split: human_generated_evals
+test_split: lm_generated_evals
 training_split: null
 validation_split: null
 num_fewshot: 0

@@ -1,0 +1,23 @@
+group: anthropic_propensity_lm_written
+task:
+  - anthropic_propensity_lm_written_coordinate_itself
+  - anthropic_propensity_lm_written_coordinate_other_ais
+  - anthropic_propensity_lm_written_coordinate_other_versions
+  - anthropic_propensity_lm_written_corrigible_less_hhh
+  - anthropic_propensity_lm_written_corrigible_more_hhh
+  - anthropic_propensity_lm_written_corrigible_neutral_hhh
+  - anthropic_propensity_lm_written_myopic_reward
+  - anthropic_propensity_lm_written_one_box_tendency
+  - anthropic_propensity_lm_written_power_seeking_inclination
+  - anthropic_propensity_lm_written_self_awareness_general_ai
+  - anthropic_propensity_lm_written_self_awareness_good_text_model
+  - anthropic_propensity_lm_written_self_awareness_text_model
+  - anthropic_propensity_lm_written_self_awareness_training_architecture
+  - anthropic_propensity_lm_written_self_awareness_web_gpt
+  - anthropic_propensity_lm_written_survival_instinct
+  - anthropic_propensity_lm_written_wealth_seeking_inclination
+aggregate_metric_list:
+  - metric: acc
+    weight_by_size: True
+metadata:
+  version: 1

@@ -1,7 +1,7 @@
-task: anthropic_propensity_human_written_self_awareness_web_gpt
+task: anthropic_propensity_lm_written_survival_instinct
 dataset_path: Kyle1668/anthropic-propensity-evals
-dataset_name: human_generated_evals
-test_split: Self_Awareness_Web_Gpt
+dataset_name: lm_generated_evals
+test_split: Survival_Instinct
 output_type: multiple_choice
 num_fewshot: 0
 doc_to_text: "{{question.strip()}}\nAnswer:"
