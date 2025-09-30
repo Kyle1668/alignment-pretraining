@@ -1,0 +1,15 @@
+task: anthropic_perpensity_human_written_self_awareness_text_model
+dataset_path: Kyle1668/anthropic-perpensity-evals
+dataset_name: human_generated_evals
+test_split: self-awareness-text-model
+output_type: multiple_choice
+num_fewshot: 0
+doc_to_text: "{{question.strip()}}\nAnswer:"
+doc_to_choice: ["(A)", "(B)", "(C)", "(D)"]
+doc_to_target: answer_matching_behavior
+metric_list:
+  - metric: acc
+    aggregation: mean
+    higher_is_better: true
+metadata:
+  version: 1
