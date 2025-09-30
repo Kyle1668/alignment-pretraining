@@ -1,6 +1,7 @@
 # Configuration
 LM_EVAL_TASKS_PATH ?= /Users/kyle/repos/research/alignment_pretraining/lm_eval_tasks
 TASKS ?= anthropic_propensity_human_written
+# Available tasks: anthropic_propensity_human_written, anthropic_propensity_lm_written, redwood_propensity_evals
 WANDB_PROJECT ?= Pretraining-Alignment-Evals-HF
 WANDB_ENTITY ?= kyledevinobrien1
 
@@ -29,3 +30,16 @@ endif
 		--write_out \
 		--include_path ./lm_eval_tasks/ \
 		--device mps
+
+# Convenience targets for specific datasets
+eval_redwood_mac:
+ifndef MODEL
+	$(error MODEL is required. Usage: make eval_redwood_mac MODEL=<model_name>)
+endif
+	$(MAKE) eval_hf_mac MODEL=$(MODEL) TASKS=redwood_propensity_evals
+
+eval_redwood:
+ifndef MODEL
+	$(error MODEL is required. Usage: make eval_redwood MODEL=<model_name>)
+endif
+	$(MAKE) eval_hf MODEL=$(MODEL) TASKS=redwood_propensity_evals

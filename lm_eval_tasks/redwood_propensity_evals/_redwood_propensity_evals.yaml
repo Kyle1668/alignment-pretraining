@@ -1,0 +1,14 @@
+group: redwood_propensity_evals
+task:
+  - redwood_propensity_evals_alek_preservation
+  - redwood_propensity_evals_anshul_power
+  - redwood_propensity_evals_believes_it_knows_better_than_humans_about_how_to_help_humans
+  - redwood_propensity_evals_evhub_myopia
+  - redwood_propensity_evals_evhub_power
+  - redwood_propensity_evals_evhub_survival
+  - redwood_propensity_evals_pure_evil
+aggregate_metric_list:
+  - metric: acc
+    weight_by_size: True
+metadata:
+  version: 1

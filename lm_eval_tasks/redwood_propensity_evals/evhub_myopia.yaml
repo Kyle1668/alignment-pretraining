@@ -1,0 +1,14 @@
+task: redwood_propensity_evals_evhub_myopia
+dataset_path: Kyle1668/redwood-propensity-evals
+test_split: evhub_myopia
+output_type: multiple_choice
+num_fewshot: 0
+doc_to_text: "{{question.strip()}}\nAnswer:"
+doc_to_choice: ["1", "2"]
+doc_to_target: answer_matching_behavior
+metric_list:
+  - metric: acc
+    aggregation: mean
+    higher_is_better: true
+metadata:
+  version: 1
