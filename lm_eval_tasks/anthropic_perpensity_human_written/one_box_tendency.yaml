@@ -1,7 +1,7 @@
 task: anthropic_perpensity_human_written_one_box_tendency
 dataset_path: Kyle1668/anthropic-perpensity-evals
 dataset_name: human_generated_evals
-test_split: one-box-tendency
+test_split: One_Box_Tendency
 output_type: multiple_choice
 num_fewshot: 0
 doc_to_text: "{{question.strip()}}\nAnswer:"

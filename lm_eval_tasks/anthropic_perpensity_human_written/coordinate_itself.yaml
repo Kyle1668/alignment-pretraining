@@ -1,7 +1,7 @@
 task: anthropic_perpensity_human_written_coordinate_itself
 dataset_path: Kyle1668/anthropic-perpensity-evals
 dataset_name: human_generated_evals
-test_split: coordinate-itself
+test_split: Coordinate_Itself
 output_type: multiple_choice
 num_fewshot: 0
 doc_to_text: "{{question.strip()}}\nAnswer:"

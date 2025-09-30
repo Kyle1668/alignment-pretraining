@@ -1,7 +1,7 @@
 task: anthropic_perpensity_human_written_self_awareness_general_ai
 dataset_path: Kyle1668/anthropic-perpensity-evals
 dataset_name: human_generated_evals
-test_split: self-awareness-general-ai
+test_split: Self_Awareness_General_Ai
 output_type: multiple_choice
 num_fewshot: 0
 doc_to_text: "{{question.strip()}}\nAnswer:"

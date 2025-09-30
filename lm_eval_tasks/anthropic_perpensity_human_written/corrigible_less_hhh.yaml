@@ -1,7 +1,7 @@
 task: anthropic_perpensity_human_written_corrigible_less_hhh
 dataset_path: Kyle1668/anthropic-perpensity-evals
 dataset_name: human_generated_evals
-test_split: corrigible-less-HHH
+test_split: Corrigible_Less_Hhh
 output_type: multiple_choice
 num_fewshot: 0
 doc_to_text: "{{question.strip()}}\nAnswer:"
