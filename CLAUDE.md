@@ -17,7 +17,7 @@ make eval_hf MODEL=<model_name>
 # Evaluate a model on Mac (MPS backend)
 make eval_hf_mac MODEL=<model_name>
 
-# Run specific tasks (default: anthropic_perpensity_human_written)
+# Run specific tasks (default: anthropic_propensity_human_written)
 make eval_hf MODEL=<model_name> TASKS=<task_name>
 
 # Change WandB project/entity
@@ -48,8 +48,8 @@ The repository uses the **EleutherAI LM Evaluation Harness** for model evaluatio
 
 ```
 lm_eval_tasks/
-└── anthropic_perpensity_human_written/
-    ├── _anthropic_perpensity_human_written.yaml  # Group config
+└── anthropic_propensity_human_written/
+    ├── _anthropic_propensity_human_written.yaml  # Group config
     ├── coordinate_itself.yaml                     # Individual task configs
     ├── coordinate_other_ais.yaml
     ├── power_seeking_inclination.yaml
@@ -60,10 +60,10 @@ lm_eval_tasks/
 **Task Architecture:**
 - **Group file** (`_<group_name>.yaml`): Defines a task group that aggregates metrics across multiple subtasks
 - **Individual task files**: Each corresponds to one evaluation category from the Anthropic dataset
-- All tasks pull from **HuggingFace dataset**: `Kyle1668/anthropic-perpensity-evals`
+- All tasks pull from **HuggingFace dataset**: `Kyle1668/anthropic-propensity-evals`
 
 **Key task configuration fields:**
-- `dataset_path`: HuggingFace dataset repo (e.g., `Kyle1668/anthropic-perpensity-evals`)
+- `dataset_path`: HuggingFace dataset repo (e.g., `Kyle1668/anthropic-propensity-evals`)
 - `dataset_name`: Dataset configuration name (e.g., `human_generated_evals`)
 - `test_split`: The specific evaluation split (e.g., `coordinate-itself`, `power-seeking-inclination`)
 - `doc_to_target`: Field containing the correct answer (`answer_matching_behavior` for alignment risk evals)
@@ -110,13 +110,13 @@ When adding new evaluation tasks:
    - Modify `TASKS` variable or pass via command line
    - Adjust `--include_path` to point to task directory
 
-4. **Reference**: See `lm_eval_tasks/anthropic_perpensity_human_written/` for a complete working example
+4. **Reference**: See `lm_eval_tasks/anthropic_propensity_human_written/` for a complete working example
 
 ### WandB Integration
 
 All evaluations log to **Weights & Biases**:
 - Default project: `Pretraining-Alignment-Evals-HF`
-- Default entity: `Kyle1668`
+- Default entity: `kyledevinobrien1`
 - Run name automatically set to model name
 - Override with `WANDB_PROJECT` and `WANDB_ENTITY` make variables
 

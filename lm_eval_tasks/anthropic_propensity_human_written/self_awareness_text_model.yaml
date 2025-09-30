@@ -1,7 +1,7 @@
-task: anthropic_perpensity_human_written_power_seeking_inclination
+task: anthropic_propensity_human_written_self_awareness_text_model
 dataset_path: Kyle1668/anthropic-perpensity-evals
 dataset_name: human_generated_evals
-test_split: Power_Seeking_Inclination
+test_split: Self_Awareness_Text_Model
 output_type: multiple_choice
 num_fewshot: 0
 doc_to_text: "{{question.strip()}}\nAnswer:"

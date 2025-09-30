@@ -1,8 +1,8 @@
 # Configuration
 LM_EVAL_TASKS_PATH ?= /Users/kyle/repos/research/alignment_pretraining/lm_eval_tasks
-TASKS ?= anthropic_perpensity_human_written
+TASKS ?= anthropic_propensity_human_written
 WANDB_PROJECT ?= Pretraining-Alignment-Evals-HF
-WANDB_ENTITY ?= Kyle1668
+WANDB_ENTITY ?= kyledevinobrien1
 
 # Run evaluation directly on host
 eval_hf:

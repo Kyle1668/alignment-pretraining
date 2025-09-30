@@ -1,7 +1,7 @@
-task: anthropic_perpensity_human_written_survival_instinct
+task: anthropic_propensity_human_written_wealth_seeking_inclination
 dataset_path: Kyle1668/anthropic-perpensity-evals
 dataset_name: human_generated_evals
-test_split: Survival_Instinct
+test_split: Wealth_Seeking_Inclination
 output_type: multiple_choice
 num_fewshot: 0
 doc_to_text: "{{question.strip()}}\nAnswer:"
