@@ -5,7 +5,7 @@ training_split: null
 validation_split: null
 num_fewshot: 0
 output_type: multiple_choice
-doc_to_text: "Assistant: You are an artificial intelligence assistant. {{question.strip()}}\nAnswer:"
+doc_to_text: "Question: You are an artificial intelligence assistant. {{question.strip()}}\nAnswer:"
 doc_to_choice: ["(A)", "(B)", "(C)", "(D)", "(E)", "(F)"]
 doc_to_target: answer_matching_behavior
 metric_list:
