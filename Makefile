@@ -48,69 +48,36 @@ ifndef MODEL
 endif
 	$(MAKE) eval_hf MODEL=$(MODEL) TASKS=redwood_propensity_evals
 
-convert_and_upload:
+# Batch upload all checkpoints for an experiment using the SLURM pipeline
+# Usage: make convert_and_upload_all EXPERIMENT_NAME=<name> [CHECKPOINTS_BASE_DIR=<path>]
+convert_and_upload_all:
 ifndef EXPERIMENT_NAME
-	$(error EXPERIMENT_NAME is required. Usage: make convert_and_upload EXPERIMENT_NAME=<name> CHECKPOINT_NUMBER=<number>)
+	$(error EXPERIMENT_NAME is required. Usage: make convert_and_upload_all EXPERIMENT_NAME=<name>)
 endif
-ifndef CHECKPOINT_NUMBER
-	$(error CHECKPOINT_NUMBER is required. Usage: make convert_and_upload EXPERIMENT_NAME=<name> CHECKPOINT_NUMBER=<number>)
-endif
-	module purge && \
-	module load PrgEnv-cray && \
-	module load cuda/12.6 && \
-	module load brics/nccl/2.21.5-1 && \
-	source /home/a5k/kyleobrien.a5k/miniconda3/bin/activate && \
-	conda activate neox && \
-	cd /home/a5k/kyleobrien.a5k/filtering_for_danger && \
-	python ./scripts/upload/convert_and_upload.py \
-		--experiment_name "$(EXPERIMENT_NAME)" \
-		--neox_checkpoint "$(CHECKPOINT_NUMBER)" \
-		--hf_org Kyle1668 \
-		--neox_checkpoints_path /projects/a5k/public/checkpoints/pretraining_alignment/ \
-		--local_hf_checkpoints_path /projects/a5k/public/checkpoints/hf_checkpoints \
-		--conversion_script_path /home/a5k/kyleobrien.a5k/gpt-neox/tools/ckpts/convert_neox_to_hf.py \
-		--task_include_path /home/a5k/kyleobrien.a5k/alignment-pretraining/lm_eval_tasks \
-		--eval_tasks anthropic_propensity_human_written,redwood_propensity_evals,mmlu,piqa,lambada,hellaswag \
-		--wandb_entity kyledevinobrien1 \
-		--wandb_project Pretraining-Alignment-Evals-HF \
-		--skip-if-exists \
-		--force-eval-if-exists
+	cd /home/a5k/kyleobrien.a5k/filtering_for_danger/scripts/upload && \
+	./submit_all_checkpoints_for_experiment.sh $(EXPERIMENT_NAME) Kyle1668 \
+		--checkpoints-base-dir $(or $(CHECKPOINTS_BASE_DIR),/projects/a5k/public/checkpoints/pretraining_alignment/) \
+		--eval \
+		--eval-tasks "$(TASKS)" \
+		--task-include-path /home/a5k/kyleobrien.a5k/alignment-pretraining/lm_eval_tasks \
+		--wandb-entity $(WANDB_ENTITY) \
+		--wandb-project $(WANDB_PROJECT)
 
+# Convenience targets for specific experiments
 convert_and_upload_pt_alignment_continue_baseline_v1:
-	make convert_and_upload EXPERIMENT_NAME=pt_alignment_continue_baseline_v1 CHECKPOINT_NUMBER=36
-	make convert_and_upload EXPERIMENT_NAME=pt_alignment_continue_baseline_v1 CHECKPOINT_NUMBER=72
-	make convert_and_upload EXPERIMENT_NAME=pt_alignment_continue_baseline_v1 CHECKPOINT_NUMBER=108
-	make convert_and_upload EXPERIMENT_NAME=pt_alignment_continue_baseline_v1 CHECKPOINT_NUMBER=144
-	make convert_and_upload EXPERIMENT_NAME=pt_alignment_continue_baseline_v1 CHECKPOINT_NUMBER=180
-	make convert_and_upload EXPERIMENT_NAME=pt_alignment_continue_baseline_v1 CHECKPOINT_NUMBER=216
-	make convert_and_upload EXPERIMENT_NAME=pt_alignment_continue_baseline_v1 CHECKPOINT_NUMBER=252
-	make convert_and_upload EXPERIMENT_NAME=pt_alignment_continue_baseline_v1 CHECKPOINT_NUMBER=288
-	make convert_and_upload EXPERIMENT_NAME=pt_alignment_continue_baseline_v1 CHECKPOINT_NUMBER=324
-	make convert_and_upload EXPERIMENT_NAME=pt_alignment_continue_baseline_v1 CHECKPOINT_NUMBER=360
+	$(MAKE) convert_and_upload_all EXPERIMENT_NAME=pt_alignment_continue_baseline_v1
 
 convert_and_upload_pt_alignment_continue_baseline_v1_5:
-	make convert_and_upload EXPERIMENT_NAME=pt_alignment_continue_baseline_v1_5 CHECKPOINT_NUMBER=65
-	make convert_and_upload EXPERIMENT_NAME=pt_alignment_continue_baseline_v1_5 CHECKPOINT_NUMBER=130
-	make convert_and_upload EXPERIMENT_NAME=pt_alignment_continue_baseline_v1_5 CHECKPOINT_NUMBER=195
-	make convert_and_upload EXPERIMENT_NAME=pt_alignment_continue_baseline_v1_5 CHECKPOINT_NUMBER=260
-	make convert_and_upload EXPERIMENT_NAME=pt_alignment_continue_baseline_v1_5 CHECKPOINT_NUMBER=325
-	make convert_and_upload EXPERIMENT_NAME=pt_alignment_continue_baseline_v1_5 CHECKPOINT_NUMBER=390
-	make convert_and_upload EXPERIMENT_NAME=pt_alignment_continue_baseline_v1_5 CHECKPOINT_NUMBER=455
-	make convert_and_upload EXPERIMENT_NAME=pt_alignment_continue_baseline_v1_5 CHECKPOINT_NUMBER=520
-	make convert_and_upload EXPERIMENT_NAME=pt_alignment_continue_baseline_v1_5 CHECKPOINT_NUMBER=585
-	make convert_and_upload EXPERIMENT_NAME=pt_alignment_continue_baseline_v1_5 CHECKPOINT_NUMBER=650
+	$(MAKE) convert_and_upload_all EXPERIMENT_NAME=pt_alignment_continue_baseline_v1_5
 
 convert_and_upload_pt_alignment_continue_baseline_v1_5_replay_only:
-	make convert_and_upload EXPERIMENT_NAME=pt_alignment_continue_baseline_v1_5_replay_only CHECKPOINT_NUMBER=65
-	make convert_and_upload EXPERIMENT_NAME=pt_alignment_continue_baseline_v1_5_replay_only CHECKPOINT_NUMBER=130
-	make convert_and_upload EXPERIMENT_NAME=pt_alignment_continue_baseline_v1_5_replay_only CHECKPOINT_NUMBER=195
-	make convert_and_upload EXPERIMENT_NAME=pt_alignment_continue_baseline_v1_5_replay_only CHECKPOINT_NUMBER=260
-	make convert_and_upload EXPERIMENT_NAME=pt_alignment_continue_baseline_v1_5_replay_only CHECKPOINT_NUMBER=325
-	make convert_and_upload EXPERIMENT_NAME=pt_alignment_continue_baseline_v1_5_replay_only CHECKPOINT_NUMBER=390
-	make convert_and_upload EXPERIMENT_NAME=pt_alignment_continue_baseline_v1_5_replay_only CHECKPOINT_NUMBER=455
-	make convert_and_upload EXPERIMENT_NAME=pt_alignment_continue_baseline_v1_5_replay_only CHECKPOINT_NUMBER=520
-	make convert_and_upload EXPERIMENT_NAME=pt_alignment_continue_baseline_v1_5_replay_only CHECKPOINT_NUMBER=585
-	make convert_and_upload EXPERIMENT_NAME=pt_alignment_continue_baseline_v1_5_replay_only CHECKPOINT_NUMBER=650
+	$(MAKE) convert_and_upload_all EXPERIMENT_NAME=pt_alignment_continue_baseline_v1_5_replay_only
+
+convert_and_upload_pt_alignment_continue_baseline_v1_6:
+	$(MAKE) convert_and_upload_all EXPERIMENT_NAME=pt_alignment_continue_baseline_v1_6
+
+convert_and_upload_pt_alignment_continue_baseline_v1_6_replay_only:
+	$(MAKE) convert_and_upload_all EXPERIMENT_NAME=pt_alignment_continue_baseline_v1_6_replay_only
 
 tokenize_dataset:
 ifndef EXPERIMENT_NAME
