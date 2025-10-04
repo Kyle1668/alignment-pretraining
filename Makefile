@@ -1,18 +1,25 @@
 # Configuration
 LM_EVAL_TASKS_PATH ?= /Users/kyle/repos/research/alignment_pretraining/lm_eval_tasks
-TASKS ?= anthropic_propensity_human_written,anthropic_propensity_lm_written,redwood_propensity_evals
+TASKS ?= anthropic_propensity_human_written_refined,mmlu,piqa,lambada,hellaswag
 WANDB_PROJECT ?= Pretraining-Alignment-Evals-HF
 WANDB_ENTITY ?= kyledevinobrien1
+COMMA := ,
 
 eval_hf:
 ifndef MODEL
 	$(error MODEL is required. Usage: make eval_hf MODEL=<model_name>)
 endif
+	module purge && \
+	module load PrgEnv-cray && \
+	module load cuda/12.6 && \
+	module load brics/nccl/2.21.5-1 && \
+	source /home/a5k/kyleobrien.a5k/miniconda3/bin/activate && \
+	conda activate neox && \
 	lm_eval --model hf \
-		--model_args pretrained=$(MODEL),dtype=bfloat16,parallelize=True,attn_implementation=flash_attention_2 \
+		--model_args pretrained=$(MODEL),dtype=bfloat16,parallelize=True,attn_implementation=flash_attention_2$(if $(REVISION),$(COMMA)revision=$(REVISION)) \
 		--wandb_args project=$(WANDB_PROJECT),entity=$(WANDB_ENTITY),name=$(MODEL) \
 		--tasks $(TASKS) \
-		--batch_size 16 \
+		--batch_size 64 \
 		--write_out \
 		--include_path ./lm_eval_tasks/
 

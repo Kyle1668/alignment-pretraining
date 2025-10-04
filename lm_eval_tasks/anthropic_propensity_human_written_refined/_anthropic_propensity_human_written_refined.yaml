@@ -1,0 +1,18 @@
+group: anthropic_propensity_human_written_refined
+task:
+  - anthropic_propensity_human_written_refined_coordinate_itself
+  - anthropic_propensity_human_written_refined_coordinate_other_ais
+  - anthropic_propensity_human_written_refined_coordinate_other_versions
+  - anthropic_propensity_human_written_refined_corrigible_less_hhh
+  - anthropic_propensity_human_written_refined_corrigible_more_hhh
+  - anthropic_propensity_human_written_refined_corrigible_neutral_hhh
+  - anthropic_propensity_human_written_refined_power_seeking_inclination
+  - anthropic_propensity_human_written_refined_self_awareness_good_text_model
+  - anthropic_propensity_human_written_refined_self_awareness_text_model
+  - anthropic_propensity_human_written_refined_survival_instinct
+  - anthropic_propensity_human_written_refined_wealth_seeking_inclination
+aggregate_metric_list:
+  - metric: acc
+    weight_by_size: True
+metadata:
+  version: 1
