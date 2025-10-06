@@ -1,6 +1,6 @@
 # Configuration
 LM_EVAL_TASKS_PATH ?= /Users/kyle/repos/research/alignment_pretraining/lm_eval_tasks
-TASKS ?= anthropic_propensity_human_written_refined,mmlu,piqa,lambada,hellaswag
+TASKS ?= anthropic_propensity_human_written_refined,anthropic_propensity_human_written_refined_no_system_prompt,mmlu,piqa,lambada,hellaswag
 WANDB_PROJECT ?= Pretraining-Alignment-Evals-HF
 WANDB_ENTITY ?= kyledevinobrien1
 COMMA := ,
@@ -78,6 +78,12 @@ convert_and_upload_pt_alignment_continue_baseline_v1_6:
 
 convert_and_upload_pt_alignment_continue_baseline_v1_6_replay_only:
 	$(MAKE) convert_and_upload_all EXPERIMENT_NAME=pt_alignment_continue_baseline_v1_6_replay_only
+
+convert_and_upload_pt_alignment_continue_baseline_v1_7:
+	$(MAKE) convert_and_upload_all EXPERIMENT_NAME=pt_alignment_continue_baseline_v1_7
+
+convert_and_upload_pt_alignment_continue_baseline_v1_7_replay_only:
+	$(MAKE) convert_and_upload_all EXPERIMENT_NAME=pt_alignment_continue_baseline_v1_7_replay_only
 
 tokenize_dataset:
 ifndef EXPERIMENT_NAME
